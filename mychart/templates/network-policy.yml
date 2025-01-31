@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-web-to-mongodb
+  namespace: sledrich
+spec:
+  podSelector:
+    matchLabels:
+      app: mongodb  # Applique la policy aux pods MongoDB
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: webdb  # Autorise les pods webdb à accéder à mongodb
+    ports:
+    - protocol: TCP
+      port: 27017  # Port MongoDB

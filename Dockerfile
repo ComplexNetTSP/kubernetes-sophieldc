@@ -10,6 +10,9 @@ COPY app.py /app/
 # Installer les dépendances Flask et pymongo
 RUN pip install flask pymongo
 
+# Installer curl et autres outils nécessaires
+RUN apk --no-cache add curl
+
 # Exposer le port 5000
 EXPOSE 5000
 
